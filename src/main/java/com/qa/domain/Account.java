@@ -1,12 +1,15 @@
 package com.qa.domain;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Account {
 
 	private String firstName;
 	private String secondName;
-	private String accountNumber;
+	private Long accountNumber;
 
-	public Account(String firstName, String secondName, String accountNumber) {
+	public Account(String firstName, String secondName, Long accountNumber) {
 		this.firstName = firstName;
 		this.secondName = secondName;
 		this.accountNumber = accountNumber;
@@ -28,11 +31,11 @@ public class Account {
 		this.secondName = secondName;
 	}
 
-	public String getAccountNumber() {
+	public Long getAccountNumber() {
 		return accountNumber;
 	}
 
-	public void setAccountNumber(String accountNumber) {
+	public void setAccountNumber(Long accountNumber) {
 		this.accountNumber = accountNumber;
 	}
 
