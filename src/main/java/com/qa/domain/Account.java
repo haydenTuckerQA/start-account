@@ -1,22 +1,24 @@
 package com.qa.domain;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Account {
 
-	@Column (length = 50)
+	@GeneratedValue
+	@Id
+	private Long id;
+	@Size(min=2, max=80)
 	private String firstName;
-	@Column (length = 50)
+	@Size(min=2, max=80)
 	private String secondName;
-	@Id @GeneratedValue(strategy=GenerationType.AUTO)
-	private Long accountNumber;
+	@Size(min=4, max=4)
+	private String accountNumber;
 
-	public Account(String firstName, String secondName, Long accountNumber) {
+	public Account(String firstName, String secondName, String accountNumber) {
 		this.firstName = firstName;
 		this.secondName = secondName;
 		this.accountNumber = accountNumber;
@@ -38,12 +40,20 @@ public class Account {
 		this.secondName = secondName;
 	}
 
-	public Long getAccountNumber() {
+	public String getAccountNumber() {
 		return accountNumber;
 	}
 
-	public void setAccountNumber(Long accountNumber) {
+	public void setAccountNumber(String accountNumber) {
 		this.accountNumber = accountNumber;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 }
