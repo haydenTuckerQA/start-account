@@ -18,9 +18,9 @@ import com.qa.domain.Account;
 import com.qa.util.JSONUtil;
 
 @RunWith(MockitoJUnitRunner.class)
-public class AccountServiceDBImplTest {
+public class AccountServiceDBRepoTest {
 	@InjectMocks
-	private AccountServiceDBImpl accountServiceDBI;
+	private AccountServiceDBRepo accountServiceDBI;
 	
 	@Mock
 	private EntityManager em;
