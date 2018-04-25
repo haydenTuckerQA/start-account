@@ -1,15 +1,17 @@
 package com.qa.service.business;
 
+import javax.ws.rs.core.Response;
+
 public interface AccountService {
 	
-	String createAccount(String accountAsJson);
+	Response createAccount(String accountAsJson);
 
-	String updateAccount(Long id, String newAccountJson);
+	Response updateAccount(Long id, String newAccountJson);
 
-	String deleteAccount(Long accountId);
+	Response deleteAccount(Long id);
 	
-	String getAllAccounts();
+	Response getAllAccounts();
 	
-	String getAnAccount(String accountNumber);
+	Response getAnAccount(String accountNumber);
 
 }
