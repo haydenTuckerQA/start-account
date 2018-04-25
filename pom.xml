@@ -1,11 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.qa.account</groupId>
-  <artifactId>account-project</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <packaging>war</packaging>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.qa.account</groupId>
+  	<artifactId>account-project</artifactId>
+  	<version>0.0.1-SNAPSHOT</version>
+  	<packaging>war</packaging>
   
-  <properties>
+  	<properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <version.jboss.bom>10.1.0.Final</version.jboss.bom>
         <version.wildfly.maven.plugin>1.0.2.Final</version.wildfly.maven.plugin>
@@ -15,19 +15,25 @@
     </properties>
 
     <dependencyManagement>
-      <dependencies>
-          <dependency>
-              <groupId>org.wildfly.bom</groupId>
-              <artifactId>wildfly-javaee7-with-tools</artifactId>
-              <version>${version.jboss.bom}</version>
-              <type>pom</type>
-              <scope>import</scope>
-          </dependency>
-        </dependencies>
+		<dependencies>
+	        <dependency>
+	            <groupId>org.wildfly.bom</groupId>
+	            <artifactId>wildfly-javaee7-with-tools</artifactId>
+	            <version>${version.jboss.bom}</version>
+	            <type>pom</type>
+	            <scope>import</scope>
+	        </dependency>
+	        <!-- https://mvnrepository.com/artifact/javax.ws.rs/javax.ws.rs-api -->
+		<dependency>
+		    <groupId>javax.ws.rs</groupId>
+		    <artifactId>javax.ws.rs-api</artifactId>
+		    <version>2.1</version>
+		</dependency>
+		</dependencies>
     </dependencyManagement>
 
     <dependencies>
-   <dependency>
+   		<dependency>
             <groupId>javax.enterprise</groupId>
             <artifactId>cdi-api</artifactId>
             <scope>provided</scope>
@@ -130,18 +136,6 @@
 		    <version>2.7</version>
 		</dependency>
 		
-		<dependency>
-		    <groupId>log4j</groupId>
-		    <artifactId>log4j</artifactId>
-		    <version>1.2.17</version>
-		</dependency>
-		
-		<dependency>
-		    <groupId>junit</groupId>
-		    <artifactId>junit</artifactId>
-		    <version>4.12</version>
-		</dependency>
-		
 		<!-- https://mvnrepository.com/artifact/org.mockito/mockito-all -->
 		<dependency>
 		    <groupId>org.mockito</groupId>
@@ -149,8 +143,6 @@
 		    <version>2.0.2-beta</version>
 		    <scope>test</scope>
 		</dependency>
-		
-
     </dependencies>
 
     <build>

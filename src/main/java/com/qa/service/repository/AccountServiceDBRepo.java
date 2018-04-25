@@ -31,7 +31,7 @@ public class AccountServiceDBRepo implements AccountServiceRepo {
 		em.persist(newAccount);
 		return "{\"message\": \"Account has been sucessfully created\"}";
 	}
-	
+
 	@Override
 	@Transactional(REQUIRED)
 	public String updateAnAccount(Long id, String newAccountJSON) {
@@ -55,14 +55,15 @@ public class AccountServiceDBRepo implements AccountServiceRepo {
 	
 	@Override
 	public String getAllAccounts() {
-		TypedQuery<Account> query = em.createQuery("SELECT a FROM ACCOUNT a", Account.class);
+		TypedQuery<Account> query = em.createQuery("SELECT a FROM Account a", Account.class);
 		List<Account> accountsList = query.getResultList();
 		return jsonUtil.getJSONForObject(accountsList);
 	}
 	
 	@Override
 	public String getAnAccount(String accountNumber) {
-		TypedQuery<Account> query = em.createQuery("SELECT a FROM ACCOUNT a WHERE a.accountNumber = :accountNumber", Account.class);
+		TypedQuery<Account> query = em.createQuery("SELECT a FROM Account a WHERE a.accountNumber = :accountNumber", Account.class);
+		query.setParameter("accountNumber", accountNumber);
 		return jsonUtil.getJSONForObject(query.getResultList().get(0));
 	}
 	

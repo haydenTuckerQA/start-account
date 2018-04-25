@@ -17,6 +17,8 @@ public class Account {
 	private String secondName;
 	@Size(min=4, max=4)
 	private String accountNumber;
+	
+	public Account(){};
 
 	public Account(String firstName, String secondName, String accountNumber) {
 		this.firstName = firstName;
