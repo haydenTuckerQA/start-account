@@ -1,4 +1,4 @@
-package com.qa.repository;
+package com.qa.service.repository;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,7 +27,7 @@ public class AccountServiceMapRepo implements AccountServiceRepo {
 		Account accountToAdd = jsonUtil.getObjectForJSON(accountAsJson, Account.class);
 		this.accounts.put(this.id, accountToAdd);
 		this.id++;
-		return "Account has been sucessfully created";
+		return "{\"message\": \"Account has been sucessfully created\"}";
 	}
 
 	@Override
@@ -39,7 +39,7 @@ public class AccountServiceMapRepo implements AccountServiceRepo {
 			this.accounts.put(id, updatedAccount);
 		}
 		
-		return "Account has been sucessfully updated";
+		return "{\"message\": \"Account has been sucessfully updated\"}";
 	}
 
 	@Override
@@ -50,7 +50,7 @@ public class AccountServiceMapRepo implements AccountServiceRepo {
 			this.accounts.remove(accountId);
 		}
 		
-		return "Account has been sucessfully deleted";
+		return "{\"message\": \"Account has been sucessfully deleted\"}";
 	}
 
 	@Override
@@ -76,4 +76,11 @@ public class AccountServiceMapRepo implements AccountServiceRepo {
 		this.jsonUtil = jsonUtil;
 	}
 
+	public Map<Long, Account> getAccounts() {
+		return accounts;
+	}
+
+	public void setAccounts(Map<Long, Account> accounts) {
+		this.accounts = accounts;
+	}
 }

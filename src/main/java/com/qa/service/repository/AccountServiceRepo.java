@@ -1,4 +1,4 @@
-package com.qa.repository;
+package com.qa.service.repository;
 
 import com.qa.util.JSONUtil;
 

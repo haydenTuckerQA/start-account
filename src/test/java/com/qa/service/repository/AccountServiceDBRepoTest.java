@@ -1,4 +1,4 @@
-package com.qa.repository;
+package com.qa.service.repository;
 
 import java.util.ArrayList;
 
@@ -15,12 +15,13 @@ import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.qa.domain.Account;
+import com.qa.service.repository.AccountServiceDBRepo;
 import com.qa.util.JSONUtil;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AccountServiceDBRepoTest {
 	@InjectMocks
-	private AccountServiceDBRepo accountServiceDBI;
+	private AccountServiceDBRepo accountServiceDBRepo;
 	
 	@Mock
 	private EntityManager em;
@@ -28,36 +29,36 @@ public class AccountServiceDBRepoTest {
 	@Mock
 	private TypedQuery<Account> query;
 	
-	JSONUtil jsonUtil;
+	private JSONUtil jsonUtil;
 	
 	private static final String ACCOUNT_AS_JSON = "{\"firstName\":\"Hayden\",\"secondName\":\"Tucker\",\"accountNumber\":\"1234\"}";
 	private static final String ACCOUNT_LIST_AS_JSON = "[{\"firstName\":\"Hayden\",\"secondName\":\"Tucker\",\"accountNumber\":\"1234\"}]";
 	
 	@Before
 	public void initialise() {
-		accountServiceDBI.setEm(em);
+		accountServiceDBRepo.setEm(em);
 		jsonUtil = new JSONUtil();
-		accountServiceDBI.setJSONUtil(jsonUtil);
+		accountServiceDBRepo.setJSONUtil(jsonUtil);
 	}
 	
 	@Test
 	public void testCreateAnAccount() {
-		String expectedValue = "Account has been sucessfully created";
-		String actualValue = accountServiceDBI.createAnAccount(ACCOUNT_AS_JSON);
+		String expectedValue = "{\"message\": \"Account has been sucessfully created\"}";
+		String actualValue = accountServiceDBRepo.createAnAccount(ACCOUNT_AS_JSON);
 		Assert.assertEquals(expectedValue, actualValue);
 	}
 
 	@Test
 	public void testUpdateAnAccount() {
-		String expectedValue = "Account has been sucessfully updated";
-		String actualValue = accountServiceDBI.updateAnAccount(123L, ACCOUNT_AS_JSON);
+		String expectedValue = "{\"message\": \"Account has been sucessfully updated\"}";
+		String actualValue = accountServiceDBRepo.updateAnAccount(123L, ACCOUNT_AS_JSON);
 		Assert.assertEquals(expectedValue, actualValue);
 	}
 
 	@Test
 	public void testDeleteAccount() {
-		String expectedValue = "Account has been sucessfully deleted";
-		String actualValue = accountServiceDBI.deleteAccount(123L);
+		String expectedValue = "{\"message\": \"Account has been sucessfully deleted\"}";
+		String actualValue = accountServiceDBRepo.deleteAccount(123L);
 		Assert.assertEquals(expectedValue, actualValue);
 	}
 
@@ -68,7 +69,7 @@ public class AccountServiceDBRepoTest {
 		accounts.add(new Account("Hayden", "Tucker", "1234"));
 		Mockito.when(query.getResultList()).thenReturn(accounts);
 		String expectedValue = ACCOUNT_LIST_AS_JSON;
-		String actualValue =  accountServiceDBI.getAllAccounts();
+		String actualValue =  accountServiceDBRepo.getAllAccounts();
 		Assert.assertEquals(expectedValue, actualValue);
 	}
 
@@ -79,7 +80,7 @@ public class AccountServiceDBRepoTest {
 		accounts.add(new Account("Hayden", "Tucker", "1234"));
 		Mockito.when(query.getResultList()).thenReturn(accounts);
 		String expectedValue = ACCOUNT_AS_JSON;
-		String actualValue = accountServiceDBI.getAnAccount("1234");
+		String actualValue = accountServiceDBRepo.getAnAccount("1234");
 		Assert.assertEquals(expectedValue, actualValue);
 	}
 }

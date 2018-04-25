@@ -1,39 +1,47 @@
-package com.qa.service;
+package com.qa.service.business;
 
-import java.util.HashMap;
-import java.util.Map;
+import javax.inject.Inject;
 
 import com.qa.domain.Account;
+import com.qa.service.repository.AccountServiceRepo;
+import com.qa.util.JSONUtil;
 
-public class AccountService {
+public class AccountServiceImpl implements AccountService {
+	
+	@Inject
+	AccountServiceRepo accountServiceRepo;
+	
+	@Inject
+	JSONUtil jsonUtil;
 
-	private Map<Integer, Account> accountMap;
-
-	private int count = 0;
-
-	public AccountService() {
-		accountMap = new HashMap<Integer, Account>();
-	}
-
-	public void addAccountFromMap(Account userAccount) {
-		accountMap.put(count, userAccount);
-		count++;
-	}
-
-	public void removeAccountFromMap(Integer accountToRemove) {
-		boolean countExists = accountMap.containsKey(accountToRemove);
-		if (countExists) {
-			accountMap.remove(accountToRemove);
+	@Override
+	public String createAccount(String accountAsJson) {
+		Account account = jsonUtil.getObjectForJSON(accountAsJson, Account.class);
+		
+		if (account.getAccountNumber().equals("9999")) {
+			return "{\"message\": \"This account is blocked\"}"; 
+		} else {
+			return accountServiceRepo.createAnAccount(accountAsJson);
 		}
 	}
 
-	public Map<Integer, Account> getAccountMap() {
-		return accountMap;
+	@Override
+	public String updateAccount(Long id, String newAccountJson) {
+		return accountServiceRepo.updateAnAccount(id, newAccountJson);
 	}
 
-	public int getNumberOfAccountWithFirstName(String firstNameOfAccount) {
-		return (int) accountMap.values().stream()
-				.filter(eachAccount -> eachAccount.getFirstName().equals(firstNameOfAccount)).count();
+	@Override
+	public String deleteAccount(Long accountId) {
+		return accountServiceRepo.deleteAccount(accountId);
 	}
 
+	@Override
+	public String getAllAccounts() {
+		return accountServiceRepo.getAllAccounts();
+	}
+
+	@Override
+	public String getAnAccount(String accountNumber) {
+		return accountServiceRepo.getAnAccount(accountNumber);
+	}
 }

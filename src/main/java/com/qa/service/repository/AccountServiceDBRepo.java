@@ -1,4 +1,4 @@
-package com.qa.repository;
+package com.qa.service.repository;
 
 import static javax.transaction.Transactional.TxType.REQUIRED;
 import static javax.transaction.Transactional.TxType.SUPPORTS;
@@ -29,7 +29,7 @@ public class AccountServiceDBRepo implements AccountServiceRepo {
 	public String createAnAccount(String accountAsJson) {
 		Account newAccount = jsonUtil.getObjectForJSON(accountAsJson, Account.class);
 		em.persist(newAccount);
-		return "Account has been sucessfully created";
+		return "{\"message\": \"Account has been sucessfully created\"}";
 	}
 	
 	@Override
@@ -40,7 +40,7 @@ public class AccountServiceDBRepo implements AccountServiceRepo {
 		if (oldAccount != null) {
 			em.merge(newAccount);
 		}
-		return "Account has been sucessfully updated";
+		return "{\"message\": \"Account has been sucessfully updated\"}";
 	}
 	
 	@Override
@@ -50,7 +50,7 @@ public class AccountServiceDBRepo implements AccountServiceRepo {
 		if (accountToRemove != null) {
 			em.remove(accountToRemove);
 		}
-		return "Account has been sucessfully deleted";
+		return "{\"message\": \"Account has been sucessfully deleted\"}";
 	}
 	
 	@Override
